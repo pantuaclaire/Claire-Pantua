@@ -1,20 +1,16 @@
 from flask import Flask, request, redirect, url_for, render_template_string, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-
-app = Flask(__name__)
-app.secret_key = 'supersecretkey'  # Required for session and flash messages
-
+ app = Flask(__name__)
+ app.secret_key = 'supersecretkey'  # Required for session and flash messages
 # Configure SQLite database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
+ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
+ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+ db = SQLAlchemy(app)
 # --- LOGIN MANAGER ---
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'  # Redirect unauthorized users to login page
-
+ login_manager = LoginManager()
+ login_manager.init_app(app)
+ login_manager.login_view = 'login'  # Redirect unauthorized users to login page
 # --- DATABASE MODELS ---
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
